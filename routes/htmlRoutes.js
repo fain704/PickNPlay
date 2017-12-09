@@ -27,4 +27,19 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/portfolio"));
   });
 
+  // route for user logout
+  app.get('/logout', (req, res) => {
+      if (req.session.user && req.cookies.user_sid) {
+          res.clearCookie('user_sid');
+          res.redirect('/');
+      } else {
+          res.redirect('/login');
+      }
+  });
+
+  // route for handling 404 requests(unavailable routes)
+  app.use(function (err, req, res, next) {
+    res.status(404).send("Sorry can't find that!")
+  });
+
 };
