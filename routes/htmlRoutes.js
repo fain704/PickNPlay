@@ -4,28 +4,56 @@ var path = require('path');
 //routes
 module.exports = function(app) {
 
+  // middleware function to check for logged-in users
+  var sessionChecker = (req, res, next) => {
+      if (req.session.user && req.cookies.user_sid) {
+          res.redirect('/dashboard');
+      } else {
+          next();
+      }    
+  };
+
   //index
   app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
+
+
+
 
 
   //login
-  app.get('/login', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/login"));
+  app.route('/login')
+    .get(sessionChecker, (req, res) => {
+        res.sendFile(__dirname + '/public/login.html');
+    })
+    .post((req, res, next) => {
+        var username = req.body.username,
+            password = req.body.password;
+        console.log(req.body);
+        User.findOne({ where: { username: username } }).then(function (user) {
+            try{
+                if (!user) {
+                    res.redirect('/login');
+                } else if (!user.validPassword(password)) {
+                    res.redirect('/login');
+                } else {
+                    req.session.user = user.dataValues;
+                    res.redirect('/');
+                }
+            }catch(err){
+                console.log("error: ", err);
+                next(err);
+            }
+        });
+    });
+
+
+  //team route
+  app.get('/team', function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/team.html"));
   });
 
-
-  //scoreboard
-  app.get('/scoreboard', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/scoreboard"));
-  });
-
-
-  //portfolio
-  app.get('/portfolio', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/portfolio"));
-  });
 
   // route for user logout
   app.get('/logout', (req, res) => {
@@ -33,7 +61,7 @@ module.exports = function(app) {
           res.clearCookie('user_sid');
           res.redirect('/');
       } else {
-          res.redirect('/login');
+          res.redirect('/');
       }
   });
 
