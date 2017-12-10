@@ -74,7 +74,7 @@ module.exports = function(app) {
   });
 
   //score route
-  app.route('/scores')
+  app.route('/score')
   .get(sessionChecker, (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "../public/scores.html"));
   });
