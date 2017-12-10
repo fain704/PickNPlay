@@ -5,10 +5,12 @@ var path = require('path');
 //routes
 module.exports = function(app) {
 
+  
+
   // middleware function to check for logged-in users
   var sessionChecker = (req, res, next) => {
       if (req.session.user && req.cookies.user_sid) {
-          res.redirect('/dashboard');
+          res.redirect('/');
       } else {
           next();
       }    
@@ -16,13 +18,13 @@ module.exports = function(app) {
 
   //index
   app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname + "./public/index.html"));
   });
 
   // route for user signup
   app.route('/signup')
       .get(sessionChecker, (req, res) => {
-          res.sendFile(__dirname + '/public/signup.html');
+          res.sendFile(__dirname + './public/login.html');
       })
       .post((req, res) => {
           User.create({
@@ -42,7 +44,7 @@ module.exports = function(app) {
   //login
   app.route('/login')
     .get(sessionChecker, (req, res) => {
-        res.sendFile(__dirname + '/public/login.html');
+        res.sendFile(__dirname + './public/login.html');
     })
     .post((req, res, next) => {
         var username = req.body.username,
@@ -67,8 +69,29 @@ module.exports = function(app) {
 
 
   //team route
+  // app.get('/team', function(err, req, res) {
+  //   if (err) throw err;
+  //   res.sendFile(path.join(__dirname + "../public/team.html"));
+  // });
+
   app.get('/team', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/team.html"));
+    res.sendFile(path.join(__dirname + "./public/index.html"));
+  });
+
+  //score route
+  // app.get('/score', function(err, req, res) {
+  //   if (err) throw err;
+  //   res.sendFile(path.join(__dirname + "../public/scores.html"));
+  // });
+
+  app.get('/score', function(req, res) {
+    res.sendFile(path.join(__dirname + "./public/index.html"));
+  });
+
+  //team schedule
+  app.get('/schedule', function(err, req, res) {
+    if (err) throw err;
+    res.sendFile(path.join(__dirname + "./public/schedule.html"));
   });
 
 
