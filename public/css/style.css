@@ -449,3 +449,38 @@ p.change_link{
     background: transparent;
 }
 
+   table {
+    border-collapse: collapse;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid green;
+    padding-left:4px;
+}
+
+table {
+    width: 100%;
+}
+
+{
+    height: 50px;
+}
+td,th{
+    color:blue;
+}
+.header {
+        text-align: center;
+        color: green;
+    }
+
+    #home,#away{
+        border:2px solid black;
+        font-weight: bolder;
+        height: 5px;
+
+
+    }
