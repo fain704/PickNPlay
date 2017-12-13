@@ -34,7 +34,7 @@ require('./routes/htmlRoutes')(app);
 
 // create all the defined tables in the specified databae.
 sequelize.sync({
-    force: true
+    //force: true
   })
   .then(() => {
     console.log('users table has been successfully created, if one doesn\'t exist')

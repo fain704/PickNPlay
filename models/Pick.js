@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 
 // create a sequelize instance with our local postgres database information.
 var sequelize = require("./connection.js");
+
 const Pick = sequelize.define("Pick", {
   id: {
     type: Sequelize.INTEGER,
@@ -19,6 +20,15 @@ const Pick = sequelize.define("Pick", {
   week: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  homeTeam: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  awayTeam: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
+
 module.exports = Pick;
