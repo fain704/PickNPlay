@@ -1,5 +1,5 @@
 // var db = require('../models');
-const Pick = require("../models/Pick");
+const game = require("../models/game");
 
 
 module.exports = function(app) {
@@ -17,13 +17,15 @@ module.exports = function(app) {
 
   });
 
-  app.get('/testPick/:userId', function(req, res) {
+  app.get('/api/startGame', function(req, res) {
     //Use this fucntion to find all picks as well (findAll)
-    Pick.destroy({
-      where: {
-        UserId: req.params.userId
-      }
-    });
+    game.destroy(
+      //   {
+      //   where: {
+      //     UserId: req.params.userId
+      //   }
+      // }
+    );
 
     var awayTeams = [
       "Arizona Cardinals",
@@ -72,12 +74,10 @@ module.exports = function(app) {
       var teams = pickTeams(awayTeams, homeTeams);
 
       //Create function for SQL DB
-      Pick.create({
+      Game.create({
         week: 0,
-        score: 0,
         homeTeam: teams.home,
         awayTeam: teams.away,
-        UserId: req.params.userId
       }).then((pick) => {
 
         picks.push(pick);
