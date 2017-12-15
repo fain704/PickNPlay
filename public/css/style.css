@@ -481,3 +481,8 @@ td,th{
         border:2px solid black;
         font-weight: bolder;
         height: 5px;
+        text-align: center;
+    }
+  .hero-image{ max-width:100%; height:auto;
+
+  }
