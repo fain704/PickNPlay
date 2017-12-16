@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <title>PICK 'n PLAY</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js">
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 
 <body>
@@ -54,17 +51,66 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="image">
-                        <a href=""><img src="img/fantasy-football-badge.png" class="hero-image" alt="Pick 'n Play"></a>
-                        <div class="site-heading">
-                            <h2>To Login or Signup <a href="/login">  <button class="ui inverted green button">click here</button></h2> </a>
-                        </div>
+                    <div class="post-heading">
+                        <h1>Login or Signup</h1>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </header>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-8 col-md-10 mx-auto">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <div class="row">
+                          <h4 class="card-title">Login or Signup</h4>
+                        </div>
+                        <div class = "row">
+                            <!-- login form goes here -->
+                            <form action="/login" method="post">
+                                <div>
+                                    <label>Username:</label>
+                                    <input type="text" name="username"/>
+                                </div>
+                                <div>
+                                    <label>Password:</label>
+                                    <input type="password" name="password"/>
+                                </div>
+                                <div>
+                                    <input class="btn btn-primary" type="submit" value="Log In"/>
+                                </div>
+                            </form>
+                        </div>
+                        <hr>
+                        <div class = "row">
+                            <!-- signup form goes here -->
+                            <form action="/signup" method="post">
+                                <div>
+                                    <label>Username:</label>
+                                    <input type="text" name="username"/>
+                                </div>
+                                <div>
+                                    <label>Email:</label>
+                                    <input type="text" name="email"/>
+                                </div>    
+                                <div>
+                                    <label>Password:</label>
+                                    <input type="password" name="password"/>
+                                </div>
+                                <div>
+                                    <input class="btn btn-primary" type="submit" value="Sign Up"/>
+                                </div>
+                            </form> 
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr>
     <!-- Footer -->
     <footer>

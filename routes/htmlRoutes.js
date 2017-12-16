@@ -1,19 +1,23 @@
 //dependencies
 var User = require("../models/user");
 var path = require('path');
+var jwt = require('jsonwebtoken');
+
+const SECRET = "supersecretkey";
 
 //routes
 module.exports = function(app) {
 
-  
+  function authCheck(req, res, next){
 
-  // middleware function to check for logged-in users
-  var sessionChecker = (req, res, next) => {
-      if (req.session && req.cookies) {
-          next();
+    jwt.verify(req.cookies.AUTH, SECRET, function(err, decoded){
+      if (err) {
+        res.redirect('/login');
       } else {
-          res.redirect('/login');
-      }    
+        req.decoded = decoded;
+        next();
+      }
+    });
   };
 
   //index route
@@ -24,7 +28,7 @@ module.exports = function(app) {
   // route for user signup
   app.route('/signup')
       .get((req, res) => {
-          res.status(200).sendFile(path.join(__dirname, '../public/login.html'));
+          res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
       })
       .post((req, res) => {
           User.create({
@@ -44,7 +48,7 @@ module.exports = function(app) {
   //login route
   app.route('/login')
     .get((req, res) => {
-        res.status(200).sendFile(path.join(__dirname, '../public/login.html'));
+        res.status(200).sendFile(path.join(__dirname, '../public/login2.html'));
     })
     .post((req, res, next) => {
         var username = req.body.username,
@@ -57,7 +61,20 @@ module.exports = function(app) {
                 } else if (!user.validPassword(password)) {
                     res.redirect('/login');
                 } else {
-                    req.session.user = user.dataValues;
+                    // console.log(req);
+                    console.log('cookies',req.cookies);
+
+                    var token = jwt.sign({
+                      id: user.id,
+                    }, SECRET);
+
+                    res.cookie('AUTH',token, {
+                      expires: new Date(Date.now() + (86400 * 14 * 1000)),
+                      maxAge: (86400 * 14 * 1000),
+                      httpOnly: true,
+                      secure: false
+                    });
+
                     res.redirect('/');
                 }
             }catch(err){
@@ -74,22 +91,26 @@ module.exports = function(app) {
   });
 
   //score route
-  app.route('/score')
-  .get(sessionChecker, (req, res) => {
+  app.get('/score', authCheck, (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "../public/scores.html"));
   });
 
   //team schedule
-  app.route('/schedule')
-  .get(sessionChecker, (req, res) => {
+  app.get('/schedule', authCheck, (req, res) => {
     res.status(200).sendFile(path.join(__dirname, "../public/schedule.html"));
   });
+
 
 
   // route for user logout
   app.get('/logout', (req, res) => {
       if (req.session && req.cookies) {
-          res.clearCookie('user_sid');
+          res.cookie('AUTH', '', {
+            expires: new Date(0),
+            maxAge: 0,
+            httpOnly: true,
+            secure: false
+          });
           res.redirect('/');
       } else {
           res.redirect('/');
