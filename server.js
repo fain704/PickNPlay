@@ -26,23 +26,13 @@ app.use(bodyParser.json({
 //set up static Directory
 app.use(express.static("public"));
 
+// initialize cookie-parser to allow us access the cookies stored in the browser. 
+app.use(cookieParser());
+
 //routes
 require('./routes/apiRoutes')(app);
 require('./routes/htmlRoutes')(app);
 
-// initialize cookie-parser to allow us access the cookies stored in the browser. 
-app.use(cookieParser());
-
-// initialize express-session to allow us track the logged-in user across sessions.
-app.use(session({
-    key: 'user_sid',
-    secret: 'somerandonstuffs',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 600000
-    }
-}));
 
 // create all the defined tables in the specified databae.
 sequelize.sync({
