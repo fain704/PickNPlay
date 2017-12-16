@@ -1,6 +1,4 @@
 var Sequelize = require('sequelize');
-var User = require('./User.js');
-var bcrypt = require('bcrypt');
 
 // create a sequelize instance with our local postgres database information.
 var sequelize = require("./connection.js");

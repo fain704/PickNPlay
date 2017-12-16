@@ -37,7 +37,7 @@ module.exports = function(app) {
               password: req.body.password
           })
           .then(user => {
-              req.session.user = user.dataValues;
+              
               res.redirect('/team');
           })
           .catch(error => {
@@ -62,7 +62,7 @@ module.exports = function(app) {
                     res.redirect('/login');
                 } else {
                     // console.log(req);
-                    console.log('cookies',req.cookies);
+                    // console.log('cookies',req.cookies);
 
                     var token = jwt.sign({
                       id: user.id,

@@ -1,6 +1,6 @@
 // var db = require('../models');
 const game = require("../models/game");
-
+var week =0
 
 module.exports = function(app) {
 
@@ -19,12 +19,12 @@ module.exports = function(app) {
 
   app.get('/api/startGame', function(req, res) {
     //Use this fucntion to find all picks as well (findAll)
+    week++
     game.destroy(
-      //   {
-      //   where: {
-      //     UserId: req.params.userId
-      //   }
-      // }
+        {
+        where: {
+        }
+      }
     );
 
     var awayTeams = [
@@ -74,8 +74,8 @@ module.exports = function(app) {
       var teams = pickTeams(awayTeams, homeTeams);
 
       //Create function for SQL DB
-      Game.create({
-        week: 0,
+      game.create({
+        week: week,
         homeTeam: teams.home,
         awayTeam: teams.away,
       }).then((pick) => {
