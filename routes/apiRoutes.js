@@ -17,13 +17,21 @@ module.exports = function(app) {
 
   });
 
+  app.get('/api/getGames', function(req,res){
+    game.findAll({
+      where:{}
+    }).then((result) => {
+      console.log(JSON.stringify(result));
+      res.body(JSON.stringify(results));
+    });
+  });
+
   app.get('/api/startGame', function(req, res) {
     //Use this fucntion to find all picks as well (findAll)
     week++
     game.destroy(
         {
-        where: {
-        }
+        where: {}
       }
     );
 

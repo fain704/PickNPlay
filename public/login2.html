@@ -2,6 +2,48 @@
 <html lang="en">
 
 <head>
+    <style type="text/css">
+    /* Bordered form */
+
+   .card-body {
+        border: 3px solid #f1f1f1;
+    }
+    /* Full-width inputs */
+
+ /*   input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+       
+        border: 1px solid #ccc;
+     
+    }*/
+    /* Set a style for all buttons */
+    /* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+   
+}
+
+  
+    /* Add a hover effect for buttons */
+
+    input:hover {
+        opacity: 0.8;
+    }
+
+    /* Add padding to containers */
+
+    .container {
+        padding: 25px;
+    }
+
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -61,59 +103,58 @@
             </div>
         </div>
     </header>
-
-    <div class = "container">
-        <div class = "row">
-            <div class = "col-lg-8 col-md-10 mx-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
                         <div class="row">
-                          <h4 class="card-title">Login or Signup</h4>
+                            <h4 class="card-title">Already a member ? Login</h4>
                         </div>
-                        <div class = "row">
+                        <div class="row">
                             <!-- login form goes here -->
                             <form action="/login" method="post">
                                 <div>
                                     <label>Username:</label>
-                                    <input type="text" name="username"/>
+                                    <input type="text" name="username" />
                                 </div>
                                 <div>
                                     <label>Password:</label>
-                                    <input type="password" name="password"/>
+                                    <input type="password" name="password" />
                                 </div>
                                 <div>
-                                    <input class="btn btn-primary" type="submit" value="Log In"/>
+                                    <input class="btn btn-primary" type="submit" value="Log In" />
                                 </div>
                             </form>
                         </div>
                         <hr>
-                        <div class = "row">
+
+                        <div class="row">
+                            <h4>New Member? plase Signup</h4>
                             <!-- signup form goes here -->
                             <form action="/signup" method="post">
                                 <div>
                                     <label>Username:</label>
-                                    <input type="text" name="username"/>
+                                    <input type="text" name="username" />
                                 </div>
                                 <div>
                                     <label>Email:</label>
-                                    <input type="text" name="email"/>
-                                </div>    
+                                    <input type="text" name="email" />
+                                </div>
                                 <div>
                                     <label>Password:</label>
-                                    <input type="password" name="password"/>
+                                    <input type="password" name="password" />
                                 </div>
                                 <div>
-                                    <input class="btn btn-primary" type="submit" value="Sign Up"/>
+                                    <input class="btn btn-primary" type="submit" value="Sign Up" />
                                 </div>
-                            </form> 
+                            </form>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <hr>
     <!-- Footer -->
     <footer>
