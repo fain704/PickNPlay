@@ -1,6 +1,7 @@
 // var db = require('../models');
 const game = require("../models/game");
-var week =0
+var path = require('path');
+var week = 0;
 
 module.exports = function(app) {
 
@@ -20,9 +21,9 @@ module.exports = function(app) {
   app.get('/api/getGames', function(req,res){
     game.findAll({
       where:{}
-    }).then((result) => {
-      console.log(JSON.stringify(result));
-      res.body(JSON.stringify(results));
+    }).then((results) => {
+      console.log(JSON.stringify(results));
+      res.status(200).json(results);
     });
   });
 
@@ -93,9 +94,7 @@ module.exports = function(app) {
         if (picks.length === 16) res.status(200).json(picks);
 
       });
-
     }
-
   });
 
 };

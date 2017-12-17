@@ -104,7 +104,7 @@ module.exports = function(app) {
 
   // route for user logout
   app.get('/logout', (req, res) => {
-      if (req.session && req.cookies) {
+      if (req.cookies) {
           res.cookie('AUTH', '', {
             expires: new Date(0),
             maxAge: 0,
