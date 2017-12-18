@@ -2,6 +2,7 @@
 const game = require("../models/game");
 const Pick = require("../models/Pick");
 var path = require('path');
+var jwt = require('jsonwebtoken');
 var week = 0;
 
 const SECRET = "supersecretkey";
@@ -20,12 +21,21 @@ module.exports = function(app) {
     });
   };
 
-  app.post('/api/createPicks', function(req, res){
+  app.post('/api/createPicks', authCheck, function(req, res){
+
     var picks = req.body.picks
-    
+    console.log(picks);
+    console.log(req.decoded);
 
+    //create picks
+    for (var i = 0; i < picks.length; i++){
+    Pick.create({
+      week: week,
+      pickedTeam: picks[i],
+      UserId: req.decoded.id
+    })
+    }
 
-    res.status(200).redirect('/score')
   });
 
   app.get('/api/getGames', function(req,res){

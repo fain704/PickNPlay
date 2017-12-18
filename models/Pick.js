@@ -13,17 +13,13 @@ const Pick = sequelize.define("Pick", {
   },
   score: {
     type: Sequelize.INTEGER,
-    default: 0
+    defaultValue: 0
   },
   week: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  homeTeam: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  awayTeam: {
+  pickedTeam: {
     type: Sequelize.STRING,
     allowNull: false
   }
