@@ -1,28 +1,38 @@
 // var db = require('../models');
 const game = require("../models/game");
+const Pick = require("../models/Pick");
 var path = require('path');
 var week = 0;
 
+const SECRET = "supersecretkey";
+
 module.exports = function(app) {
 
-  //
-  app.get('/api', function(req, res) {
+  function authCheck(req, res, next){
 
-  });
+    jwt.verify(req.cookies.AUTH, SECRET, function(err, decoded){
+      if (err) {
+        res.redirect('/login');
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+  };
 
-  app.post('/api/post', function(req, res) {
+  app.post('/api/createPicks', function(req, res){
+    var picks = req.body.picks
+    
 
-  });
 
-  app.delete('/api/delete', function(req, res) {
-
+    res.status(200).redirect('/score')
   });
 
   app.get('/api/getGames', function(req,res){
     game.findAll({
       where:{}
     }).then((results) => {
-      console.log(JSON.stringify(results));
+      // console.log(JSON.stringify(results));
       res.status(200).json(results);
     });
   });
@@ -116,4 +126,4 @@ function pickTeams(awayTeams, homeTeams) {
     home,
     away
   }
-}
+};
