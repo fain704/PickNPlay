@@ -20,6 +20,10 @@ module.exports = function(app) {
     });
   };
 
+app.get('/api/getScore', function(req,res){
+  
+});
+
 app.post('/api/endGame', function(req, res){
   var wins = [];
   game.findAll({
