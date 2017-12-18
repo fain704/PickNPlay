@@ -1,4 +1,3 @@
-// var db = require('../models');
 const game = require("../models/game");
 const Pick = require("../models/Pick");
 var path = require('path');
@@ -21,6 +20,42 @@ module.exports = function(app) {
     });
   };
 
+app.post('/api/endGame', function(req, res){
+  var wins = [];
+  game.findAll({
+    where:{
+      week: week
+    }
+  }).then((results) => {
+    
+    for (var i = 0; i < results.length; i++) {
+
+      var winLoss = () => {
+        return Math.floor(Math.random() * 2);
+      };
+
+      if (winLoss() === 0 ){
+        wins[i] = results[i].homeTeam;
+      } else if (winLoss() === 1){
+        wins[i] = results[i].awayTeam;
+      }
+
+    }
+
+    for (var i = 0; i < wins.length; i++) {
+      Pick.update({
+        score: 1
+      },
+      { where: {
+          pickedTeam: wins[i]
+      }});
+    }
+
+  });
+  res.status(200);
+});
+
+    
   app.post('/api/createPicks', authCheck, function(req, res){
 
     var picks = req.body.picks
@@ -29,18 +64,19 @@ module.exports = function(app) {
 
     //create picks
     for (var i = 0; i < picks.length; i++){
-    Pick.create({
-      week: week,
-      pickedTeam: picks[i],
-      UserId: req.decoded.id
-    })
+      Pick.create({
+        week: week,
+        pickedTeam: picks[i],
+        UserId: req.decoded.id
+      });
     }
-
   });
 
   app.get('/api/getGames', function(req,res){
     game.findAll({
-      where:{}
+      where:{
+        week: week
+      }
     }).then((results) => {
       // console.log(JSON.stringify(results));
       res.status(200).json(results);
@@ -49,12 +85,8 @@ module.exports = function(app) {
 
   app.get('/api/startGame', function(req, res) {
     //Use this fucntion to find all picks as well (findAll)
-    week++
-    game.destroy(
-        {
-        where: {}
-      }
-    );
+    console.log('week:' + week + '------------------------------------------------------');
+    week++;
 
     var awayTeams = [
       "Arizona Cardinals",
@@ -94,7 +126,6 @@ module.exports = function(app) {
       "Tennessee Titans"
     ];
 
-
     //pick varible for sql
     var picks = [];
 
@@ -117,23 +148,22 @@ module.exports = function(app) {
     }
   });
 
-};
+  //Code to run random team picks
+  function pickTeams(awayTeams, homeTeams) {
+    //Random team picks
+    var awayIndex = Math.floor(Math.random() * awayTeams.length);
+    var homeIndex = Math.floor(Math.random() * homeTeams.length);
 
-//Code to run random team picks
-function pickTeams(awayTeams, homeTeams) {
-  //Random team picks
-  var awayIndex = Math.floor(Math.random() * awayTeams.length);
-  var homeIndex = Math.floor(Math.random() * homeTeams.length);
+    var away = awayTeams[awayIndex];
+    var home = homeTeams[homeIndex];
 
-  var away = awayTeams[awayIndex];
-  var home = homeTeams[homeIndex];
+    //Splice deletes used items from the array
+    awayTeams.splice(awayIndex, 1);
+    homeTeams.splice(homeIndex, 1);
 
-  //Splice deletes used items from the array
-  awayTeams.splice(awayIndex, 1);
-  homeTeams.splice(homeIndex, 1);
-
-  return {
-    home,
-    away
-  }
+    return {
+      home,
+      away
+    }
+  };
 };

@@ -22,6 +22,9 @@ const Game = sequelize.define("Game", {
   awayTeam: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  win: {
+    type: Sequelize.STRING,
   }
 });
 
