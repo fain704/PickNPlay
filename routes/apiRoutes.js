@@ -55,7 +55,7 @@ app.post('/api/endGame', function(req, res){
 
       if (winLoss() === 0 ){
         wins[i] = results[i].homeTeam;
-      } else if (winLoss() === 1){
+      } else {
         wins[i] = results[i].awayTeam;
       }
 
