@@ -35,10 +35,12 @@ User.prototype.validPassword = function(password) {
   return passwordCheck;
 };
 
-User.hasMany(Pick, {
-  as: "Picks"
-});
 
 
+User.associate = function(models) {
+  User.hasMany(models.Pick, {
+    as: "Picks"
+  });
+};
 // export User model for use in other files.
 module.exports = User;

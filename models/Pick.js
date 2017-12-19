@@ -25,4 +25,5 @@ const Pick = sequelize.define("Pick", {
   }
 });
 
+
 module.exports = Pick;

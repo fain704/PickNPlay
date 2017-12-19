@@ -1,5 +1,6 @@
 const game = require("../models/game");
 const Pick = require("../models/Pick");
+const User = require('../models/User');
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var week = 0;
@@ -21,7 +22,20 @@ module.exports = function(app) {
   };
 
 app.get('/api/getScore', function(req,res){
-  
+  Pick.findAll({
+    attributes: [
+      'UserID',
+      [Pick.sequelize.fn('SUM', Pick.sequelize.col('score')), 'score']
+    ],
+    include: [{
+      model: User,
+      required: true,
+      attributes: ['username']
+    }],
+    group: ['UserID']
+  }).then((results) => {
+    res.status(200).json(results);
+  })
 });
 
 app.post('/api/endGame', function(req, res){
