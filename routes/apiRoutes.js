@@ -1,6 +1,6 @@
 const game = require("../models/game");
 const Pick = require("../models/Pick");
-const User = require('../models/User');
+const User = require('../models/user');
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var week = 0;

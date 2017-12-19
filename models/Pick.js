@@ -25,5 +25,12 @@ const Pick = sequelize.define("Pick", {
   }
 });
 
+Pick.associate = function(models) {
+    Pick.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
 
 module.exports = Pick;
