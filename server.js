@@ -1,9 +1,7 @@
 //dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
-var Sequelize = require('sequelize');
-var sequelize = require('./models/connection.js');
-const User = require("./models/User.js");
+var db = require('./models');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 
@@ -35,8 +33,8 @@ require('./routes/htmlRoutes')(app);
 
 
 // create all the defined tables in the specified databae.
-sequelize.sync({
-    //force: true
+db.sequelize.sync({
+    force: true
   })
   .then(() => {
     console.log('users table has been successfully created, if one doesn\'t exist')

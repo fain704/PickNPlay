@@ -1,9 +1,9 @@
-
+var bcrypt = require('bcrypt');
 
 
 module.exports = function(sequelize, DataTypes){
 
-  var bcrypt = require('bcrypt');
+
 
     // setup User model and its fields.
   var User = sequelize.define('User', {
