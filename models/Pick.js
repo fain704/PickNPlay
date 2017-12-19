@@ -1,26 +1,23 @@
-var Sequelize = require('sequelize');
 
-// create a sequelize instance with our local postgres database information.
-var sequelize = require("./connection.js");
-
-const Pick = sequelize.define("Pick", {
+module.exports = function(sequelize, DataTypes){
+  var Pick = sequelize.define("Pick", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     unique: true,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true
   },
   score: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     defaultValue: 0
   },
   week: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   pickedTeam: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   }
 });
@@ -33,4 +30,5 @@ Pick.associate = function(models) {
     });
   };
 
-module.exports = Pick;
+return Pick;
+}

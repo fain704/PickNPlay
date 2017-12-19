@@ -1,7 +1,10 @@
 //dependencies
-var User = require("../models/user");
+const db = require('../models/index')
 var path = require('path');
 var jwt = require('jsonwebtoken');
+const game = db.Game;
+const Pick = db.Pick;
+const User = db.User;
 
 const SECRET = "supersecretkey";
 

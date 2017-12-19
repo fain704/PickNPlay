@@ -1,31 +1,30 @@
-var Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes){
 
-// create a sequelize instance with our local postgres database information.
-var sequelize = require("./connection.js");
-
-const Game = sequelize.define("Game", {
+  var Game = sequelize.define("Game", {
   id: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     unique: true,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true
   },
   week: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   homeTeam: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   awayTeam: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   win: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
   }
 });
 
-module.exports = Game;
+  return Game;
+
+}

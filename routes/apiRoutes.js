@@ -1,9 +1,10 @@
-const game = require("../models/game");
-const Pick = require("../models/Pick");
-const User = require('../models/user');
+const db = require('../models/index')
 var path = require('path');
 var jwt = require('jsonwebtoken');
 var week = 0;
+const game = db.Game;
+const Pick = db.Pick;
+const User = db.User;
 
 const SECRET = "supersecretkey";
 
