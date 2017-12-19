@@ -119,7 +119,7 @@ app.post('/api/endGame', function(req, res){
       "Chicago Bears",
       "New Orleans Saints",
       "Houston Texans",
-      "Carolina Panters",
+      "Carolina Panthers",
       "Pittsburgh Steelers",
       "Cleveland Browns",
       "Baltimore Ravens",
