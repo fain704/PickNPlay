@@ -17,6 +17,6 @@
   },
   "production": {
     "dialect": "mysql",
-    "use_env_variable": "JAWSDB_URL"
+    "use_env_variable": "mysql://iulbc6dbmqg7y3wi:pj8cr04lw3ixe396@q3vtafztappqbpzn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/d57rmo4dvq0cv15i"
   }
 }
